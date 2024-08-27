@@ -1,23 +1,25 @@
-// src/components/ResultsGrid.js
-import React from 'react';
-import ImageCard from './ImageCard';
-import VideoCard from './VideoCard';
+import React from "react";
 
 const ResultsGrid = ({ results, type }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {type === 'images' &&
-        results.map((photo) => (
-          <div key={photo.id}>
-            <ImageCard photo={photo} />
-          </div>
-        ))}
-      {type === 'videos' &&
-        results.map((video) => (
-          <div key={video.id}>
-            <VideoCard video={video} />
-          </div>
-        ))}
+    <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
+      {results.map((item, index) => (
+        <div key={index} className="break-inside-avoid mb-4">
+          {type === "images" ? (
+            <img
+              src={item.src.large}
+              alt={item.alt}
+              className="w-full rounded-lg shadow-md"
+            />
+          ) : (
+            <video
+              src={item.video_files[0].link}
+              className="w-full rounded-lg shadow-md"
+              controls
+            />
+          )}
+        </div>
+      ))}
     </div>
   );
 };

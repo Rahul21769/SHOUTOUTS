@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../Components/SearchBar";
 import ResultsGrid from "../Components/ResultGrid";
 import { searchPhotos, searchVideos } from "../Service/api";
-import LogoShoutout from "../Images/LogoShoutout.jpg";  // Default import for images
+import LogoShoutout from "../Images/LogoShoutout.jpg";
 
 const HomePage = () => {
   const [results, setResults] = useState([]);
@@ -35,7 +35,6 @@ const HomePage = () => {
   const handleReset = async () => {
     setType("images");
     setResults([]);
-    // Fetch default content for images
     const defaultImages = await searchPhotos("nature");
     setResults(defaultImages);
   };
@@ -44,10 +43,9 @@ const HomePage = () => {
     <div className="container mx-auto p-4">
       <div className="flex mt-4 mb-4 bg-gray-800 py-4 px-4 rounded-lg items-center justify-between">
         <div className="flex items-center space-x-4">
-          {/* Logo */}
           <img 
             src={LogoShoutout}
-            alt="Logo"  // Adding alt attribute for accessibility
+            alt="Logo"
             className="h-12 w-20" 
           />
           
