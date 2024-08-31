@@ -1,11 +1,11 @@
 import React from "react";
 
-const ResultsGrid = ({ results, type }) => {
+const ResultGrid = ({ results }) => {
   return (
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
       {results.map((item, index) => (
         <div key={index} className="break-inside-avoid mb-4">
-          {type === "images" ? (
+          {"src" in item ? (
             <img
               src={item.src.large}
               alt={item.alt}
@@ -24,4 +24,4 @@ const ResultsGrid = ({ results, type }) => {
   );
 };
 
-export default ResultsGrid;
+export default ResultGrid;

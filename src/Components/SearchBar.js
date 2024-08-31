@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, reset }) => {
   const [query, setQuery] = useState("");
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (reset) {
+      setQuery(""); // Clear the input field
+      inputRef.current?.focus(); // Optionally, focus the input field after reset
+    }
+  }, [reset]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +27,7 @@ const SearchBar = ({ onSearch }) => {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          ref={inputRef}
           className="w-full p-2 pl-10 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Search for images or videos..."
         />
