@@ -1,71 +1,76 @@
 import React, { useState, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 import SearchBar from "../Components/SearchBar";
-import ResultGrid from "../Components/ResultGrid";
+import ResultsGrid from "../Components/ResultGrid";
 import { searchPhotos, searchVideos } from "../Service/api";
 import LogoShoutout from "../Images/LogoShoutout.jpg";
+import { useInView } from "react-intersection-observer";
 
 const HomePage = () => {
   const [results, setResults] = useState([]);
-  const [type, setType] = useState("images"); // Default to images
+  const [type, setType] = useState("images");
+  const [query, setQuery] = useState("nature"); // Default query
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("nature"); // Default search query
-  const [resetSearch, setResetSearch] = useState(false);
-  const [noResultsMessage, setNoResultsMessage] = useState("");
-
-  const { ref, inView } = useInView({ triggerOnce: false });
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const { ref, inView } = useInView();
 
   useEffect(() => {
-    const fetchContent = async () => {
-      let data;
-      if (type === "images") {
-        data = await searchPhotos(query, page);
-      } else {
-        data = await searchVideos(query, page);
-      }
+    const fetchDefaultContent = async () => {
+      setLoading(true);
+      try {
+        let newResults;
+        if (type === "images") {
+          newResults = await searchPhotos(query, page);
+        } else if (type === "videos") {
+          newResults = await searchVideos(query, page);
+        }
 
-      if (page === 1) {
-        setResults(data);
-        setNoResultsMessage(data.length === 0 ? `No results found for "${query}".` : "");
-      } else {
-        setResults((prevResults) => [...prevResults, ...data]);
+        if (newResults.length === 0) {
+          setHasMore(false);
+        }
+
+        setResults((prevResults) => [...prevResults, ...newResults]);
+      } catch (error) {
+        console.error("Error fetching default content:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchContent();
+    fetchDefaultContent();
   }, [type, page, query]);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && hasMore && !loading) {
       setPage((prevPage) => prevPage + 1);
     }
-  }, [inView]);
+  }, [inView, hasMore, loading]);
 
-  const handleSearch = (newQuery) => {
+  const handleSearch = async (newQuery) => {
     setQuery(newQuery);
-    setPage(1); // Reset page to 1 on a new search
-    setResetSearch(false); // Reset the reset state
-  };
-
-  const handleReset = () => {
-    setQuery("nature"); // Reset to the default query
-    setType("images"); // Reset to the default type
     setPage(1);
     setResults([]);
-    setNoResultsMessage("");
-    setResetSearch(true); // Trigger the reset in SearchBar
+    setHasMore(true);
+  };
+
+  const handleReset = async () => {
+    setType("images");
+    setResults([]);
+    setQuery("nature");
+    setPage(1);
+    setHasMore(true);
   };
 
   return (
     <div className="container mx-auto p-4">
       <div className="flex mt-4 mb-4 bg-gray-800 py-4 px-4 rounded-lg items-center justify-between">
         <div className="flex items-center space-x-4">
-          <img 
+          <img
             src={LogoShoutout}
             alt="Logo"
-            className="h-12 w-20" 
+            className="h-12 w-20"
           />
-          
+
           <div className="flex space-x-2">
             <button
               className={`${
@@ -75,7 +80,9 @@ const HomePage = () => {
               } h-10 w-24 px-4 py-2 rounded-lg focus:outline-none hover:bg-opacity-90 transition-all duration-200`}
               onClick={() => {
                 setType("images");
+                setResults([]);
                 setPage(1);
+                setHasMore(true);
               }}
             >
               Images
@@ -88,7 +95,9 @@ const HomePage = () => {
               } h-10 w-24 px-4 py-2 rounded-lg focus:outline-none hover:bg-opacity-90 transition-all duration-200`}
               onClick={() => {
                 setType("videos");
+                setResults([]);
                 setPage(1);
+                setHasMore(true);
               }}
             >
               Videos
@@ -96,27 +105,28 @@ const HomePage = () => {
           </div>
         </div>
 
-        <button
+        {/* <button
           type="button"
           className="text-white text-4xl flex items-center justify-center rounded focus:outline-none"
-          style={{ height: '100%' }}
+          style={{ height: "100%" }}
           onClick={handleReset}
         >
           &times;
-        </button>
+        </button> */}
       </div>
 
-      <SearchBar onSearch={handleSearch} reset={resetSearch} />
-
-      {noResultsMessage ? (
-        <div className="text-center text-grey-500 mt-8">
-          {noResultsMessage}
-        </div>
-      ) : (
-        <ResultGrid results={results} type={type} />
+      <SearchBar onSearch={handleSearch} />
+      {results.length === 0 && !loading && (
+        <p className="text-center text-gray-500 mt-4">No results found.</p>
       )}
+      <ResultsGrid results={results} type={type} />
 
-      <div ref={ref} className="h-10" />
+      <div ref={ref} className="my-4">
+        {loading && <p>Loading more results...</p>}
+        {!hasMore && !loading && results.length > 0 && (
+          <p>No more results to show.</p>
+        )}
+      </div>
     </div>
   );
 };
