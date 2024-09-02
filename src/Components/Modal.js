@@ -40,9 +40,9 @@ const Modal = () => {
       {isOpen && (
         <div
           id="modelConfirm"
-          className="fixed z-50 inset-0 overflow-y-auto h-full w-full px-4"
+          className="fixed z-50 inset-0 overflow-y-auto h-full w-full  px-4"
         >
-          <div className="relative top-20 mx-auto shadow-xl rounded-md bg-white max-w-2xl">
+          <div className="relative top-20 mx-auto shadow-xl rounded-md bg-slate-900 max-w-2xl">
             <div className="flex justify-end p-2">
               <button
                 onClick={closeModal}
