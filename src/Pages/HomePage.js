@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../Components/SearchBar";
 import ResultsGrid from "../Components/ResultGrid";
 import { searchPhotos, searchVideos } from "../Service/api";
-import LogoShoutout from "../Images/LogoShoutout.jpg";
+import Logo from "../Images/Logo.png";
 import { useInView } from "react-intersection-observer";
 
 const HomePage = () => {
@@ -66,9 +66,9 @@ const HomePage = () => {
       <div className="flex mt-4 mb-4 bg-gray-800 py-4 px-4 rounded-lg items-center justify-between">
         <div className="flex items-center space-x-4">
           <img
-            src={LogoShoutout}
+            src={Logo}
             alt="Logo"
-            className="h-12 w-20"
+            className="h-10 w-15"
           />
 
           <div className="flex space-x-2">
@@ -117,14 +117,14 @@ const HomePage = () => {
 
       <SearchBar onSearch={handleSearch} />
       {results.length === 0 && !loading && (
-        <p className="text-center text-gray-500 mt-4">No results found.</p>
+        <p className="text-center text-white mt-4">No results found.</p>
       )}
       <ResultsGrid results={results} type={type} />
 
       <div ref={ref} className="my-4">
         {loading && <p>Loading more results...</p>}
         {!hasMore && !loading && results.length > 0 && (
-          <p>No more results to show.</p>
+          <p className="text-white">No more results to show.</p>
         )}
       </div>
     </div>
