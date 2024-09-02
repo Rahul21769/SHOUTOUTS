@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import HomePage from '../Pages/HomePage';
-
+import HomePage from "../Pages/HomePage";
 
 const Modal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,16 +34,16 @@ const Modal = () => {
         className="bg-rose-500 text-white rounded-md px-4 py-2 hover:bg-rose-700 transition"
         onClick={openModal}
       >
-       Media
+        Media
       </button>
 
       {isOpen && (
         <div
           id="modelConfirm"
-          className="fixed z-50 inset-0  overflow-y-auto h-full w-full px-4"
+          className="fixed z-50 inset-0 overflow-y-auto h-full w-full px-4"
         >
           <div className="relative top-20 mx-auto shadow-xl rounded-md bg-white max-w-2xl">
-          <div className="flex justify-end p-2">
+            <div className="flex justify-end p-2">
               <button
                 onClick={closeModal}
                 type="button"
@@ -66,9 +65,8 @@ const Modal = () => {
             </div>
 
             <div className="p-2 pt-0 text-center">
-
-            <HomePage className='bg-blue-500 w-100' /> {/* Tailwind equivalent for bg-primary */}
-
+              <HomePage className="bg-blue-500 w-100" />{" "}
+              {/* Tailwind equivalent for bg-primary */}
             </div>
           </div>
         </div>
