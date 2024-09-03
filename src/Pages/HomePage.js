@@ -62,7 +62,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto bg-gray-700 p-4">
+    <div className="container mx-auto bg-gray-700 p-4 h-screen overflow-y-scroll">
       <div className="flex mt-4 mb-4 bg-gray-800 py-4 px-4 rounded-lg items-center justify-between">
         <div className="flex items-center space-x-4">
           <img
@@ -104,15 +104,6 @@ const HomePage = () => {
             </button>
           </div>
         </div>
-
-        {/* <button
-          type="button"
-          className="text-white text-4xl flex items-center justify-center rounded focus:outline-none"
-          style={{ height: "100%" }}
-          onClick={handleReset}
-        >
-          &times;
-        </button> */}
       </div>
 
       <SearchBar onSearch={handleSearch} />

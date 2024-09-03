@@ -42,7 +42,7 @@ const Modal = () => {
           id="modelConfirm"
           className="fixed z-50 inset-0 overflow-y-auto h-full w-full  px-4"
         >
-          <div className="relative top-20 mx-auto shadow-xl rounded-md bg-slate-900 max-w-2xl">
+          <div className="relative top-20 mx-auto shadow-xl rounded-md bg-slate-900 max-w-xl">
             <div className="flex justify-end p-2">
               <button
                 onClick={closeModal}
@@ -65,7 +65,7 @@ const Modal = () => {
             </div>
 
             <div className="p-2 pt-0 text-center">
-              <HomePage className="bg-blue-500 w-100" />{" "}
+              <HomePage className="bg-red-500 w-80" />{" "}
               {/* Tailwind equivalent for bg-primary */}
             </div>
           </div>
