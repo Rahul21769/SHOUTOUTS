@@ -77,7 +77,7 @@ const HomePage = () => {
                 type === "images"
                   ? "bg-slate-500 text-white"
                   : "text-white"
-              } h-10 w-24 px-4 py-2 rounded-lg focus:outline-none hover:bg-opacity-90 transition-all duration-200`}
+              } h-8 w-24 px-0 py-0 rounded-lg focus:outline-none hover:bg-opacity-90 transition-all duration-200`}
               onClick={() => {
                 setType("images");
                 setResults([]);
@@ -92,7 +92,7 @@ const HomePage = () => {
                 type === "videos"
                   ? "bg-slate-500 text-white"
                   : "text-white"
-              } h-10 w-24 px-4 py-2 rounded-lg focus:outline-none hover:bg-opacity-90 transition-all duration-200`}
+              } h-8 w-24 px-0 py-0 rounded-lg focus:outline-none hover:bg-opacity-90 transition-all duration-200`}
               onClick={() => {
                 setType("videos");
                 setResults([]);
