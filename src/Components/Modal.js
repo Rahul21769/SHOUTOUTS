@@ -66,7 +66,6 @@ const Modal = () => {
 
             <div className="p-2 pt-0 text-center">
               <HomePage className="bg-red-500 w-80" />{" "}
-              {/* Tailwind equivalent for bg-primary */}
             </div>
           </div>
         </div>

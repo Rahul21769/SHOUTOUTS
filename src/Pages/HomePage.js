@@ -62,16 +62,16 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto bg-gray-700 p-4 h-[620px] overflow-y-scroll">
-      <div className="flex mt-4 mb-4 bg-gray-800 py-4 px-4 rounded-lg items-center justify-between">
-        <div className="flex items-center space-x-4">
+    <div className="container mx-auto bg-gray-700 p-4 h-[610px] overflow-y-scroll">
+      <div className="flex mt-4 mb-4 bg-gray-800 py-0 px-0 rounded-lg items-center justify-between">
+        <div className="flex items-center space-x-4  ">
           <img
             src={Logo}
             alt="Logo"
-            className="h-10 w-15"
+            className="h-20 w-20"
           />
 
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 ">
             <button
               className={`${
                 type === "images"
@@ -113,7 +113,7 @@ const HomePage = () => {
       <ResultsGrid results={results} type={type} />
 
       <div ref={ref} className="my-4">
-        {loading && <p>Loading more results...</p>}
+        {loading && <p className="text-white">Loading more results...</p>}
         {!hasMore && !loading && results.length > 0 && (
           <p className="text-white">No more results to show.</p>
         )}
