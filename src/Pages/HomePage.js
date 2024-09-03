@@ -62,7 +62,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto bg-gray-700 p-4 h-screen overflow-y-scroll">
+    <div className="container mx-auto bg-gray-700 p-4 h-[620px] overflow-y-scroll">
       <div className="flex mt-4 mb-4 bg-gray-800 py-4 px-4 rounded-lg items-center justify-between">
         <div className="flex items-center space-x-4">
           <img
