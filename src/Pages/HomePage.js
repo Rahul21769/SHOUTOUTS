@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../Components/SearchBar";
 import ResultsGrid from "../Components/ResultGrid";
 import { searchPhotos, searchVideos } from "../Service/api";
-import Logo from "../Images/Logo.png";
+//import Logo from "../Images/Logo.png";
 import { useInView } from "react-intersection-observer";
 
 const HomePage = () => {
@@ -62,16 +62,16 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto bg-gray-700 p-4 h-[610px] overflow-y-scroll">
-      <div className="flex mt-4 mb-4 bg-gray-800 py-0 px-0 rounded-lg items-center justify-between">
-        <div className="flex items-center space-x-4  ">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="h-20 w-20"
-          />
+    <div className="container mx-auto bg-gray-700 p-4 h-[500px] overflow-y-scroll">
+      <div className="flex mt-4 mb-4 pl-5 bg-gray-800 py-0 px-0 rounded-lg items-center justify-between">
+        <div className="flex items-center space-x-4 h-20 ml-4">
+          {/* <img */}
+            {/* src={Logo} */}
+            {/* alt="Logo" */}
+            {/* className="h-20 w-20" */}
+          {/* /> */}
 
-          <div className="flex space-x-2 ">
+          <div className="flex space-x-2  ">
             <button
               className={`${
                 type === "images"
